@@ -1,6 +1,7 @@
 import client from "@/db";
 import { NextResponse,NextRequest } from "next/server";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs"; 
 import z from "zod";
 
 
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
                     password: hashedPassword
                }
           });
-          return NextResponse.json(user);
+          return NextResponse.json(user.id);
      } catch (error) {
           return NextResponse.json({ error: error });
      }
