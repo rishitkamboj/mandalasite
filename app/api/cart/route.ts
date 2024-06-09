@@ -24,9 +24,20 @@ async function getUser(session: any) {
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    return NextResponse.json(session);
+    const user = await getUser(session);
+
+    const cartItems = await prisma.cart.findMany({
+      where: {
+        userId: user.id,
+      },
+      include: {
+        product: true,
+      },
+    });
+
+    return NextResponse.json({ cartItems });
   } catch (error) {
-    console.error('Error fetching session:', error);
+    console.error('Error fetching cart details:', error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
