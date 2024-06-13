@@ -2,12 +2,9 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Dropdown from './Dropdown';
 
-interface appbarprops{
-     username:string|null
-}
-export default function AppBar({ username }:appbarprops): JSX.Element {
+
+export default function AppBarNotLoggedIn(): JSX.Element {
      const router=useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,15 +22,14 @@ export default function AppBar({ username }:appbarprops): JSX.Element {
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            {/* <button onClick={()=>{
+            <button onClick={()=>{
                router.push("/api/auth/signin");
             }}
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
             >
               Get started
-            </button> */}
-            <Dropdown username={username} profile="Profile" signout="Sign out"/>
+            </button>
 
             <button
               type="button"

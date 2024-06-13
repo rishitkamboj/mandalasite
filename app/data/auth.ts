@@ -50,6 +50,7 @@ export const authOptions:NextAuthOptions={
       
               return {
                 id: u.id.toString(),
+                name:u.name,
                 email: u.email,
               };
             },
