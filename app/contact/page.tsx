@@ -1,9 +1,10 @@
-import AppBarNotLoggedIn from "./components/AppBarNotLoggedIn";
+import AppBarNotLoggedIn from "@/app/components/AppBarNotLoggedIn";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./data/auth";
-import AppBar from "./components/AppBar";
-import ProductPage from "./components/Total";
-import Footer from "./components/Footer";
+import { authOptions } from "@/app/data/auth";
+import AppBar from "@/app/components/AppBar";
+
+import Footer from "@/app/components/Footer";
+import ContactSection from "../components/ContactSection";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -14,7 +15,7 @@ export default async function Home() {
     return (
       <div>
         <AppBar username={session.user?.name || 'Default Username'} />
-       <ProductPage/>
+      <ContactSection/>
        <Footer/>
       </div>
     );
@@ -22,9 +23,7 @@ export default async function Home() {
     return (
       <div>
         <AppBarNotLoggedIn />
-        {/* <div>Not logged in</div>
-        <a href="./api/auth/sign">Sign in</a> */}
-            <ProductPage/>
+        <ContactSection/>
             <Footer/>
       </div>
     );

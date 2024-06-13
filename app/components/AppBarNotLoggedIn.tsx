@@ -23,7 +23,7 @@ export default function AppBarNotLoggedIn(): JSX.Element {
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button onClick={()=>{
-               router.push("/api/auth/signin");
+               router.push("/login");
             }}
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
@@ -63,8 +63,8 @@ export default function AppBarNotLoggedIn(): JSX.Element {
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
               <li>
                 <a
-                  href="#"
-                  className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700"
+                  href="/"
+                  className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700"
                   aria-current="page"
                 >
                   Home
@@ -88,7 +88,7 @@ export default function AppBarNotLoggedIn(): JSX.Element {
               </li>
               <li>
                 <a
-                  href=""
+                  href="/contact"
                   className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700"
                 >
                   Contact

@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
                               price:body.price,
                               description:body.description,
                               image:body.image,
-                              availablequantity:parseInt(body.quantity)
+                              availablequantity:body.availablequantity
            }});
 
            if(!create){
@@ -44,39 +44,39 @@ export async function POST(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
     const body = await req.json();
-    const { id, name, quantity,price,description,image,email } = body;
+   
 
-    if(email!==process.env.ADMIN_EMAIL){
+    if(body.email!==process.env.ADMIN_EMAIL){
         return NextResponse.json({status:401,message:"Unauthorized access"});   
 }
 
-    if ((!id && !name) || quantity === undefined) {
-        return NextResponse.json({ status: 400, message: "Invalid request body" });
-    }
+    // if ((!body.id && !body.name) || body.quantity === undefined) {
+    //     return NextResponse.json({ status: 400, message: "Invalid request body" });
+    // }
 
     let updatedProduct;
-    if(id){
-    if (name) {
+    if(body.id){
+    if (body.name) {
         updatedProduct = await client.product.update({
-            where: { id: parseInt(id) },
-            data: { name: name },
+            where: { id: parseInt(body.id) },
+            data: { name: body.name },
         });
-    } else if (price) {
+    } else if (body.price) {
         updatedProduct = await client.product.update({
-            where: { id: parseInt(id) },
-            data: { price: parseInt(price) },
+            where: { id: parseInt(body.id) },
+            data: { price: parseInt(body.price) },
         });
     }
-    else if(description){
+    else if(body.description){
         updatedProduct=await client.product.update({
-            where:{id:parseInt(id)},
-            data:{description:description}
+            where:{id:parseInt(body.id)},
+            data:{description:body.description}
         });
     }
-    else if(image){
+    else if(body.image){
         updatedProduct=await client.product.update({
-            where:{id:parseInt(id)},
-            data:{image:image}
+            where:{id:parseInt(body.id)},
+            data:{image:body.image}
         });
     }
     }
