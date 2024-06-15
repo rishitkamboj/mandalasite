@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -36,8 +36,8 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className="flex items-center justify-center backg">
+    <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
+      <div className="hidden lg:flex items-center justify-center backg">
         <div className="text-2xl font-bold">Name is under process HEHE</div>
       </div>
       <div className="flex items-center justify-center bg-slate-100">

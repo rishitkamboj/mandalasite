@@ -1,48 +1,77 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import ProductCard from '@/app/components/Product';
 import { Spinner } from './Spinner';
+import { useRouter } from 'next/navigation';
+
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+  href: string;
+  imageSrc: string;
+  imageAlt: string;
+}
 
 const ProductPage = () => {
-  const [products, setProducts] = useState<{ id: number; name: string; price: number; image: string; }[]>([]);
+  const router=useRouter();
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true); // Set loading to true when fetching starts
+    setLoading(true); 
 
     fetch('/api/products')
       .then(response => response.json())
       .then(data => {
-        setProducts(data);
-        setLoading(false); // Set loading to false when fetching completes
+  
+        const transformedProducts = data.map((product: any) => ({
+          id: product.id,
+          name: product.name,
+          price: `$${product.price}`,
+          href: '#', 
+          imageSrc: product.image,
+          imageAlt: product.description,
+        }));
+
+        setProducts(transformedProducts);
+        setLoading(false); 
       })
       .catch(error => {
         console.error('Error fetching products:', error);
-        setLoading(false); // Set loading to false on error as well
+        setLoading(false); 
       });
   }, []);
 
   return (
-    <div className='h-screen'>
-    <div className="flex flex-wrap justify-center ">
-      {loading ? (
-        <div className="flex items-center justify-center h-screen">
-          <div className="text-xl font-semibold text-gray-700"> <Spinner/></div>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="sr-only">Products</h2>
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {loading ? (
+            <div className="flex items-center justify-center h-screen w-full col-span-full">
+              <Spinner />
+            </div>
+          ) : (
+            products.map(product => (
+              <div onClick={()=>{router.push(`product\/${product.id}`)}}>
+              <a key={product.id} href={product.href} className="group">
+                <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+                  <img
+                    src={product.imageSrc}
+                    alt={product.imageAlt}
+                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
+                <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
+              </a>
+              </div>
+            ))
+          )}
         </div>
-       
-      ) : (
-        products.map(product => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            price={product.price}
-            image={product.image}
-          />
-        ))
-      )}
-    </div>
+      </div>
     </div>
   );
 };
