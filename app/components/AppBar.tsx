@@ -39,7 +39,7 @@ export default function AppBar({ username }:appbarprops): JSX.Element {
 
             <button
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
               aria-controls="navbar-cta"
               aria-expanded={isMenuOpen}
               onClick={toggleMenu}
@@ -78,7 +78,7 @@ export default function AppBar({ username }:appbarprops): JSX.Element {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/about"
                   className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700"
                 >
                   About

@@ -35,6 +35,7 @@ const ProductCard = ({ id, name, price, image }: ProductType) => {
   };
 
   return (
+    
     <div className="flex flex-col w-full max-w-xs bg-white rounded-lg border border-gray-100 shadow-md m-2">
       <a href="#" className="block relative overflow-hidden">
         <img className="object-cover w-full h-48" src={image} alt={name} />

@@ -90,8 +90,6 @@ export async function PUT(req: NextRequest) {
   }
 }
 
-
-
 export async function DELETE(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -127,5 +125,3 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
-
-export default { GET, PUT,DELETE};
