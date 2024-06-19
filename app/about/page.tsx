@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import SectionComponent from "../components/SectionComponent";
 
 
+
 export default function Home(){
 
      const { data: session, status } = useSession();
@@ -15,6 +16,7 @@ export default function Home(){
      <div className="h-screen">
          
          <SectionComponent/>
+    
      </div>
      <Footer/>
      </div>
